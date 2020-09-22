@@ -1,9 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const keys = require('./config/keys');
+const BodyParser = require("body-parser");
+const Bcrypt = require("bcryptjs");
+
 var session = require('express-session');
 const app = express();
 
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extend: true }));
 
 mongoose.connect(keys.mongoURI);
 const db = mongoose.connection;
