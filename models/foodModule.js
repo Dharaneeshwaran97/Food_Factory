@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const foodSchema = new Schema({
-    foodName: { type: String, default: "" },
-    foodRate: { type: String, default: "" },
-    foodProductionCost: { type: Number, default: "" },
-    foodSellingCost: { type: Number, default: "" }
+    name: { type: String, default: "" },
+    cuisine: { type: String, default: "" },
+    costOfProduction: { type: Number, default: "" },
+    sellingCost: { type: Number, default: "" },
+    ingredients: { type: String, default: "" },
+    lotNumber: { type: Number, unique: true }
 
-}, { collection: "food" });
+}, { timestamps: true });
 
 mongoose.model("food", foodSchema);

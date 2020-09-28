@@ -5,13 +5,14 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
     Name: { type: String, default: "" },
-    Email: { type: String, default: "" },
+    Email: { type: String, unique: true },
     Address: { type: String, default: "" },
     Phone: { type: Number, default: "" },
     Password: { type: String, default: "" },
-    Status: { type: String, default: "Active" }
+    Status: { type: String, default: "Active" },
+    lastLoginAt: { type: Date, default: "" }
 
-}, { collection: "user" });
+}, { timestamps: true });
 
 mongoose.model("user", userSchema);
 
