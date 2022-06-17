@@ -30,6 +30,42 @@ module.exports = app => {
         });
 
     });
+    
+    
+app.post('/signIn',(req,res)=>{
+    console.log(req.body);
+    let no= "1233456";
+    const saltRounds = 10
+    Bcrypt.genSalt(saltRounds, function (err, salt) {
+        if (err) {
+          throw err
+        } else {
+            req.body.password= Bcrypt.hash(req.body.password, salt, function(err, hash) {
+            if (err) {
+              throw err
+            } else {
+              console.log(hash)
+              //$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K
+            }
+          })
+        }
+      })
+    console.log("Dharani",req.body);
+    const passwordEnteredByUser = "mypass12312345"
+    const hash = "$2a$10$P1xuwR8SA8iSBG2xWoWt1O4XG5x7tqY8XU/dEZlOA1DEdxATA5VY6"
+    
+    Bcrypt.compare(passwordEnteredByUser, hash, function(err, isMatch) {
+      if (err) {
+        throw err
+      } else if (!isMatch) {
+        console.log("Password doesn't match!")
+      } else {
+        console.log("Password matches!")
+      }
+    })
+    // console.log(values);
+
+});
 
 
     // Login to app using users Email, password
